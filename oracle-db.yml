@@ -1,0 +1,14 @@
+---
+- name: Configure Oracle Linux 7 with Oracle Database 12c
+  hosts: all
+  become: True
+  vars_files:
+    # User defined variables for infrastructure
+    - infra-vars.yml
+    - db-vars.yml
+    # User Passwords
+    - secrets.yml
+  roles:
+    - role: linux-oracle
+    - role: oracle-install
+      become_user: '{{ oracle_user }}'
